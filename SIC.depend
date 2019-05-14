@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1557805299 source:d:\competitive programming\training\div c2\sic\main.cpp
+	<iostream>
+	<bits/stdc++.h>
+	<fstream>
+	<cstdlib>
+	"parser.h"
+	"pass2.h"
+	"numberBases.h"
+	<regex>
+
+1557805101 d:\competitive programming\training\div c2\sic\parser.h
+	<map>
+	<string>
+	<utility>
+	<fstream>
+	<vector>
+	<regex>
+	<iostream>
+	<cmath>
+	<cctype>
+	<string.h>
+
+1557579913 source:d:\competitive programming\training\div c2\sic\pass2.cpp
+	<iostream>
+	<bits/stdc++.h>
+	"parser.h"
+
+1557794113 d:\competitive programming\training\div c2\sic\numberbases.h
+	<bits/stdc++.h>
+
+1557805226 d:\competitive programming\training\div c2\sic\pass2.h
+	<bits/stdc++.h>
+	"parser.h"
+	"numberBases.h"
+	<iostream>
+

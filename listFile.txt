@@ -1,0 +1,75 @@
+line  Address   label     opcode    operand   comment
+1     0         COPY      START     0         
+2     0         FIRST     STU       RETADR    
+                       error : not valid operation code
+3     0                   LDB       #LENGTH   
+4     3                   BASE      LENGTH    
+5     3         CLOOP     +JSUB     RDREC     
+6     7                   LDA       LENGTH    
+7     a                   COMP      #0        
+8     d                   JEQ       FIL       
+9     10                  +JSUB     WRREC     
+10    14                  J         CLOOP     
+11    17        FIL       LDA       EOF       
+12    1a                  STA       BUFFER    
+13    1d                  LDA       #3        
+14    20                  STA       LENGTH    
+15    23                  +JSUB     WRREC     
+16    27                  J         @RETADR   
+17    2a        EOF       BYTE      C'EOF'    
+18    2d        RETADR    RESW      1         
+19    30        LENGTH    RESW      1         
+20    33        BUFFER    RESB      4096      
+21    1033      RDREC     CLEAR     X         
+22    1035                CLEAR     A         
+23    1037                CLEAR     S         
+24    1039                +LDT      #4096     
+25    103d      RLOOP     TD        INPUT     
+26    1040                JEQ       RLOOP     
+27    1043                TD        INPUT     
+28    1046                COMPR     A,S       
+29    1048                JEQ       EXIT      
+30    104b                STCH      BUFFER,X  
+31    104e                TIXR      T         
+32    1050                JLT       RLOOP     
+33    1053      EXIT      STX       LENGTH    
+34    1056                RSUB                
+35    1059      INPUT     BYTE      X'F1'     
+36    105a      WRREC     CLEAR     X         
+37    105c                LDT       LENGTH    
+38    105f      WLOOP     TD        OUTPUT    
+39    1062                JEQ       WLOOP     
+40    1065                LDCH      BUFFER,X  
+41    1068                WD        OUTPUT    
+42    106b                TIXR      T         
+43    106d                JLT       WLOOP     
+44    1070                RSUB                
+45    1073      OUTPUT    BYTE      X'05'     
+46    1074                END       FIRST     
+
+
+----------------------------
+        Symbol Table        
+----------------------------
+    label    |   address   |
+ BUFFER      | 33          |
+ CLOOP       | 3           |
+ EOF         | 2a          |
+ EXIT        | 1053        |
+ FIL         | 17          |
+ FIRST       | 0           |
+ INPUT       | 1059        |
+ LENGTH      | 30          |
+ OUTPUT      | 1073        |
+ RDREC       | 1033        |
+ RETADR      | 2d          |
+ RLOOP       | 103d        |
+ WLOOP       | 105f        |
+ WRREC       | 105a        |
+--------------------------------
+
+***********************************************
+
+ START PASS TWO 
+
+LineNumber    ADDRESS      LABEL       Mnemonic     OPERANDS        OBJECTCODE
